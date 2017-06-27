@@ -2,16 +2,29 @@
 
 A kit for website prototyping from Gulp 4, Pug, Stylus, Font Awesome and Bootstrap 4
 
-## Installation and Running
+## Installation, Running and Building
+
+### Install
 
 ```shell
-# 1) Install dependencies from NPM Registry
+# Install dependencies from NPM Registry
 npm i
 
-# 2) Start development server
-gulp
+# Install Gulp command line tool
+[sudo] npm install -g gulp-cli
+```
 
-# 3) Build templates without serve
+### Development
+
+```shell
+# Start development server
+gulp
+```
+
+### Build
+
+```shell
+# Build templates and styles without serve
 gulp build
 ```
 

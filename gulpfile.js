@@ -6,12 +6,10 @@ const pug = require('gulp-pug');
 const emitty = require('emitty').setup('dev', 'pug');
 const browserSync = require('browser-sync').create();
 const stylus = require('gulp-stylus');
-const sourcemaps = require('gulp-sourcemaps');
 const csscomb = require('gulp-csscomb');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglifyjs');
 const autoprefixer = require('gulp-autoprefixer');
 
 const path = {
@@ -25,7 +23,7 @@ const path = {
         fonts: 'build/static/fonts/'
     },
     src: {
-        html: 'dev/pug/**/*.pug',
+        html: 'dev/templates/**/*.pug',
         js: {
             files: ['dev/static/js/**/*.js'],
             libs: [
@@ -48,8 +46,8 @@ const path = {
         ]
     },
     watch: {
-        html: 'dev/pug/**/*.pug',
-        js: 'dev/static/js/*.js',
+        html: 'dev/templates/**/*.pug',
+        js: 'dev/static/js/**/*.js',
         css: 'dev/static/stylus/main.styl',
         img: {
             images: [
@@ -63,7 +61,7 @@ const path = {
 gulp.task('pug', () =>
     new Promise((resolve, reject) => {
         emitty.scan(global.emittyChangedFile).then(() => {
-            gulp.src('dev/pug/pages/**/*.pug')
+            gulp.src('dev/templates/pages/**/*.pug')
                 .pipe(gulpif(global.watch, emitty.filter(global.emittyChangedFile)))
                 .pipe(pug({pretty: true}))
                 .pipe(gulp.dest('build'))
@@ -81,32 +79,23 @@ gulp.task('serve', () => {
     browserSync.watch('build/**/*.*').on('change', browserSync.reload);
 });
 
-gulp.task('fonts:build', () => {
+gulp.task('fonts', () => {
     return gulp.src(path.src.fonts)
         .pipe(gulp.dest(path.build.fonts));
 });
 
-gulp.task('scripts:dev', () => {
+gulp.task('scripts', () => {
     return gulp.src(path.src.js.libs)
         .pipe(concat('libs.min.js'))
-        .pipe(gulp.dest(path.build.js));
-});
-
-gulp.task('scripts:build', () => {
-    return gulp.src(path.src.js.libs)
-        .pipe(concat('libs.min.js'))
-        .pipe(uglify())
         .pipe(gulp.dest(path.build.js));
 });
 
 gulp.task('styles:dev', () => {
     return gulp.src(path.watch.css)
-        .pipe(sourcemaps.init())
         .pipe(plumber())
         .pipe(stylus({
             'include css': true
         }))
-        .pipe(sourcemaps.write())
         .pipe(autoprefixer(['last 2 version']))
         .pipe(gulp.dest(path.build.css));
 });
@@ -145,17 +134,16 @@ gulp.task('watch', () => {
         });
 
     gulp.watch(path.src.css, gulp.series('styles:dev'));
-    gulp.watch(path.src.js.files, gulp.series('scripts:dev', gulp.parallel('js:copy')));
+    gulp.watch(path.src.js.files, gulp.series('scripts', gulp.parallel('js:copy')));
     gulp.watch(path.watch.img.images, gulp.series('img:dev'));
 });
 
 gulp.task('dev', gulp.series(
     'clean',
-    gulp.parallel('styles:dev', 'fonts:build', 'pug', 'scripts:dev', 'img:dev', 'js:copy')));
+    gulp.parallel('styles:dev', 'fonts', 'pug', 'scripts', 'img:dev', 'js:copy')));
 
 gulp.task('build', gulp.series(
     'clean',
-    gulp.parallel('styles:build', 'fonts:build', 'pug', 'scripts:build', 'js:copy'))
-);
+    gulp.parallel('styles:build', 'fonts', 'pug', 'scripts', 'js:copy')));
 
 gulp.task('default', gulp.series('dev', gulp.parallel('watch', 'serve')));
