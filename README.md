@@ -1,10 +1,19 @@
-# Gulp 4 StartKit
+# Web Prototype Kit
 
-A startkit from Gulp4, Pug, Stylus, FontAwesome and Bootstrap
+A kit for website prototyping from Gulp 4, Pug, Stylus, Font Awesome and Bootstrap 4
 
 ## Installation and Running
 
-...
+```shell
+# 1) Install dependencies from NPM Registry
+npm i
+
+# 2) Start development server
+gulp
+
+# 3) Build templates without serve
+gulp build
+```
 
 ## Credits
 
