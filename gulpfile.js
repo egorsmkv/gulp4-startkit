@@ -28,7 +28,7 @@ const path = {
             files: ['dev/static/js/**/*.js'],
             libs: [
                 'node_modules/jquery/dist/jquery.js',
-                'node_modules/tether/dist/js/tether.js',
+                'node_modules/popper.js/dist/umd/popper.js',
                 'node_modules/bootstrap/dist/js/bootstrap.js',
             ]
         },
@@ -73,7 +73,8 @@ gulp.task('pug', () =>
 
 gulp.task('serve', () => {
     browserSync.init({
-        server: 'build/'
+        server: 'build/',
+        open: false,
     });
 
     browserSync.watch('build/**/*.*').on('change', browserSync.reload);

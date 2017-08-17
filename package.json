@@ -1,6 +1,6 @@
 {
   "name": "web-prototype-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A kit for website prototyping from Gulp 4, Pug, Stylus, Font Awesome and Bootstrap 4",
   "main": "gulpfile.js",
   "author": "Yehor Smoliakov",
@@ -17,9 +17,9 @@
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.3.0",
     "gulp-stylus": "^2.6.0",
-    "bootstrap": "github:twbs/bootstrap#v4.0.0-alpha.6",
+    "bootstrap": "github:twbs/bootstrap#v4.0.0-beta",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
-    "tether": "^1.4.0"
+    "popper.js": "1.12.2"
   }
 }
