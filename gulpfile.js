@@ -3,7 +3,7 @@
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const pug = require('gulp-pug');
-const emitty = require('emitty').setup('dev', 'pug');
+const emitty = require('emitty').setup('templates', 'pug');
 const browserSync = require('browser-sync').create();
 const stylus = require('gulp-stylus');
 const csscomb = require('gulp-csscomb');
@@ -23,18 +23,18 @@ const path = {
         fonts: 'build/static/fonts/'
     },
     src: {
-        html: 'dev/templates/**/*.pug',
+        html: 'templates/**/*.pug',
         js: {
-            files: ['dev/static/js/**/*.js'],
+            files: ['static/js/**/*.js'],
             libs: [
                 'node_modules/jquery/dist/jquery.js',
                 'node_modules/popper.js/dist/umd/popper.js',
                 'node_modules/bootstrap/dist/js/bootstrap.js',
             ]
         },
-        css: 'dev/static/stylus/',
+        css: 'stylus/',
         img: {
-            images: 'dev/static/img/**/*.{png,jpg,gif}'
+            images: 'static/img/**/*.{png,jpg,gif}'
         },
         fonts: [
             'node_modules/font-awesome/fonts/FontAwesome.otf',
@@ -46,22 +46,22 @@ const path = {
         ]
     },
     watch: {
-        html: 'dev/templates/**/*.pug',
-        js: 'dev/static/js/**/*.js',
-        css: 'dev/static/stylus/main.styl',
+        html: 'templates/**/*.pug',
+        js: 'static/js/**/*.js',
+        css: 'stylus/main.styl',
         img: {
             images: [
-                'dev/static/img/**/*.{png,jpg,gif}'
+                'static/img/**/*.{png,jpg,gif}'
             ],
         }
     },
-    clean: './build'
+    clean: 'build',
 };
 
 gulp.task('pug', () =>
     new Promise((resolve, reject) => {
         emitty.scan(global.emittyChangedFile).then(() => {
-            gulp.src('dev/templates/pages/**/*.pug')
+            gulp.src('templates/pages/**/*.pug')
                 .pipe(gulpif(global.watch, emitty.filter(global.emittyChangedFile)))
                 .pipe(pug({pretty: true}))
                 .pipe(gulp.dest('build'))
