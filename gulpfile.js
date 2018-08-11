@@ -27,9 +27,9 @@ const path = {
         js: {
             files: ['static/js/**/*.js'],
             libs: [
-                'node_modules/jquery/dist/jquery.js',
-                'node_modules/popper.js/dist/umd/popper.js',
-                'node_modules/bootstrap/dist/js/bootstrap.js',
+                'node_modules/jquery/dist/jquery.min.js',
+                'node_modules/popper.js/dist/umd/popper.min.js',
+                'node_modules/bootstrap/dist/js/bootstrap.min.js',
             ]
         },
         css: 'stylus/',
