@@ -74,6 +74,14 @@ gulp.task('serve', () => {
     browserSync.init({
         server: 'build/',
         open: false,
+    },
+    (err, bs) => {
+        bs.addMiddleware("*", (req, res) => {
+            res.writeHead(302, {
+                location: '/404.html'
+            });
+            res.end('Redirecting!');
+        });
     });
 
     browserSync.watch('build/**/*.*').on('change', browserSync.reload);
