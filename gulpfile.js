@@ -6,7 +6,6 @@ const pug = require('gulp-pug');
 const emitty = require('emitty').setup('templates', 'pug');
 const browserSync = require('browser-sync').create();
 const stylus = require('gulp-stylus');
-const csscomb = require('gulp-csscomb');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const concat = require('gulp-concat');
@@ -108,7 +107,6 @@ gulp.task('styles:build', () => {
             'include css': true
         }))
         .pipe(autoprefixer(['last 2 version']))
-        .pipe(csscomb())
         .pipe(gulp.dest(path.build.css));
 });
 
