@@ -2,6 +2,10 @@
 
 A kit for website prototyping from Gulp 4, Pug, Stylus, Font Awesome and Bootstrap 4
 
+[![GitHub Actions](https://img.shields.io/endpoint.svg?cacheSeconds=-1&url=https%3A%2F%2Factions-badge.atrox.dev%2Fegorsmkv%2Fweb-prototype-kit
+%2Fbadge)](https://actions-badge.atrox.dev/egorsmkv/web-prototype-kit
+/goto)
+
 ## Installation, Running and Building
 
 ### Install
