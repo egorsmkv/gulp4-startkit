@@ -11,6 +11,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: building
       run: |
-        npm install -g yarn gulp
+        npm install -g yarn gulp-cli
         yarn install
         gulp build
